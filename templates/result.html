@@ -1,0 +1,55 @@
+<style>
+/* Apply styles to the table */
+.table-container {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Style table headers */
+.table-container th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Style table rows */
+.table-container td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Add alternating row background colors */
+.table-container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Highlight specific sentiment values with different colors */
+.table-container .Positive {
+  color: green;
+}
+
+.table-container .Neutral {
+  color: orange;
+}
+
+.table-container .NotMentioned {
+  color: gray;
+}
+
+</style>
+<div class="row d-flex justify-content-center">
+         <h1 class="heading-font">
+            Aspect Based Sentiment Analysis Results
+         </h1>
+      </div>
+      <div class="row d-flex justify-content-center">
+         <p class="custom-font">The outcome will display and assess both the aspect and sentiment of the provided reviews.</p>
+      </div>
+<div class="table-container">
+{{res|safe}}
+</div>
+{{downloadcontent|safe}}

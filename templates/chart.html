@@ -1,0 +1,179 @@
+<style>
+   .chart-card {
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   padding: 10px;
+   margin: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   float: left;
+   }
+   .custom-font {
+   font-family: 'Open Sans', sans-serif;
+   }
+   .heading-font {
+   font-family: 'Montserrat', sans-serif;
+   }
+</style>
+<div class="container-fluid">
+   <div class="row d-flex justify-content-center">
+      <h1 class="heading-font">
+         Data Visualization
+      </h1>
+   </div>
+   <div class="row d-flex justify-content-center">
+      <p class="custom-font">The gauge plot below illustrates the accuracy of each model, while the bar graph presents their respective accuracy levels.</p>
+   </div>
+   <div class="chart-card" style="float: left; width: 30%;">
+      <div id="gaugeChart1"></div>
+   </div>
+   <!-- Container for the second gauge chart (25% width) -->
+   <div class="chart-card" style="float: left; width: 30%;">
+      <div id="gaugeChart2"></div>
+   </div>
+   <div class="chart-card" style="float: left; width: 32%;">
+      <div id="verticalBarChart"></div>
+   </div>
+   <div style="clear: both;"></div>
+   <script>
+      // Bar chart data
+      var barData = [
+          {
+              x: ['Accuracy'],
+              y: [84],
+              type: 'bar',
+              name: 'RF Classifier',
+              marker: { color: 'rgba(255, 99, 132, 0.7)' },
+          },
+          {
+              x: ['Accuracy'],
+              y: [82],
+              type: 'bar',
+              name: 'XG Boost Classifier',
+              marker: { color: 'rgba(54, 162, 235, 0.7)' },
+          }
+      ];
+      
+      // Bar chart layout
+      var barLayout = {
+          barmode: 'group',
+          title: 'RF Classifier VS XG-Boost Classifier',
+          xaxis: { title: 'Models' },
+          yaxis: { title: 'Accuracy' },
+          width: 325,
+          height: 300,
+          bargap: 0.2,
+          bargroupgap: 0.5,
+      };
+      
+      // Create the bar chart
+      Plotly.newPlot('verticalBarChart', barData, barLayout);
+      
+      // Define layout for the gauge charts
+      var gaugeLayout = {
+          width: 200, // Adjust the width of the gauge charts as needed
+          height: 150, // Adjust the height of the gauge charts as needed
+      };
+      
+      var data = [
+      
+      {
+      
+      domain: { x: [0, 1], y: [0, 1] },
+      
+      value: 84,
+      
+      title: { text: "Random forest Classifier<br>Accuracy %<br>" },
+      
+      type: "indicator",
+      
+      mode: "gauge+number+delta",
+      
+      delta: { reference: 84 },
+      
+      gauge: {
+      
+      axis: { range: [null, 100] },
+      
+      steps: [
+      
+      { range: [0, 25], color: "red" },
+      { range: [25,50], color: "orange" },
+      { range: [50,75], color: "yellow" },
+      { range: [75, 100], color: "lightgreen" }
+      
+      ],
+      
+      threshold: {
+      
+      line: { color: "black", width: 4 },
+      
+      thickness: 0.75,
+      
+      value: 84
+      
+      }
+      
+      }
+      
+      }
+      
+      ];
+      
+      
+      var layout = { width: 300, height: 300, margin: { t: 0, b: 0 } };
+      
+      Plotly.newPlot('gaugeChart2', data, layout);
+      
+      var data = [
+      
+      {
+      
+      domain: { x: [0, 1], y: [0, 1] },
+      
+      value: 82,
+       
+      title: { text: "XG Boost Classifier<br>Accuracy %<br>" },
+      
+      type: "indicator",
+      
+      mode: "gauge+number+delta",
+      
+      delta: { reference: 82 },
+      
+      gauge: {
+      
+      axis: { range: [null, 100] },
+      
+      steps: [
+      
+      { range: [0, 25], color: "red" },
+      { range: [25,50], color: "orange" },
+      { range: [50,75], color: "yellow" },
+      { range: [75, 100], color: "lightgreen" }
+      
+      ],
+      
+      threshold: {
+      
+      line: { color: "black", width: 4 },
+      
+      thickness: 0.75,
+      
+      value: 82
+      
+      }
+      
+      }
+      
+      }
+      
+      ];
+      
+      
+      var layout = { width: 300, height: 300, margin: { t: 0, b: 0 } };
+      
+      Plotly.newPlot('gaugeChart1', data, layout);
+   </script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</div>
+</div>

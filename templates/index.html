@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="{{ url_for('static', filename='fonts/icomoon/style.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/popup.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+      <title>ABSA Tool</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+      <script>
+         function openPopup() {
+              var popupContainer = document.getElementById('popup-container');
+              
+              var popup = document.createElement('div');
+              popup.className = 'popup';
+              popup.innerHTML = '<div class="popup-content">No new notification !</div><span class="popup-close" onclick="this.parentNode.remove();">&times;</span>';
+              popupContainer.appendChild(popup);
+              
+              setTimeout(function() {
+                popup.remove();
+              }, 8000); // Remove the popup after 8 seconds
+            }
+      </script>
+	  <style>
+	  .centered {
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		}
+	  </style>
+   </head>
+   <body>
+      <aside class="sidebar">
+         <div class="toggle">
+            <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+            <span></span>
+            </a>
+         </div>
+         <div class="side-inner">
+            <div class="profile">
+               <img src="{{ url_for('static', filename='images/person_profile.jpg') }}" alt="Image" class="img-fluid">
+               <h3 class="name"><b> Welcome </b> Suren !</h3>
+               <span class="country">Erode, India</span>
+            </div>
+            <div class="counter d-flex justify-content-center">
+               <div class="col">
+                  <strong class="number">ABSA TOOL</strong>
+                  <span class="number-label">Dept of CSE, KIOT, Salem</span>
+               </div>
+            </div>
+            <div class="nav-menu">
+               <ul>
+                  <li><a href="#" id="home"><span class="icon-home mr-3"></span>Tool</a></li>
+                  <li><a href="#" id="Analytics"><span class="icon-search2 mr-3"></span>Explore</a></li>
+                  <li><a href="#" onclick="openPopup(); return false;"><span class="icon-notifications mr-3"></span>Notifications</a></li>
+                  <li><a href="mailto:esurender99@gmail.com"><span class="icon-location-arrow mr-3"></span>Direct</a></li>
+                  <li><a href="#"><span class="icon-sign-out mr-3"></span>Sign out</a></li>
+               </ul>
+            </div>
+         </div>
+      </aside>
+      <main>
+         <div class="site-section">
+         <div class="container">
+		 <div class="overlay" style="display:none;"></div>
+		 <div class="loader" style="display:none;"></div>
+		 <div class="textSpin" style="display:none;"><h2>Analyzing the content....</h2></div>
+            <div class="row">
+               <!--justify-content-center-->
+               <div class="col">
+                  <div class="row d-flex justify-content-center">
+                     <div id="content">
+                        <!-- Post content -->
+                        {% include 'snippets.html' %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+      <div id="popup-container" class="popup-container"></div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+         $("#Analytics").click(function () {
+         	jQuery.ajax({
+         		url: "/Analytics",
+         		type: "GET",
+         		success: function (data) {
+         			$("#content").html(data);
+         		}
+         	});
+         });
+         $("#home").click(function () {
+         	$.ajax({
+         		url: "/home",
+         		type: "GET",
+         		success: function (data) {
+         			$("#content").html(data);
+         		}
+         	});
+         });
+      </script>
+   </body>
+</html>
